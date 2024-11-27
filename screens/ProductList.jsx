@@ -16,17 +16,13 @@ const ProductList = () => {
     token === null && navigation.navigate("Sign In");
   }, [token]);
 
-  const { data, error, isFetching } = useQuery(
-    "getAllProducts",
-    () => FakeStoreService.getAllProducts(),
-    {
-      onSuccess: (data) => {
-        if (data) {
-          setProducts(data);
-        }
-      },
-    }
-  );
+  useQuery("getAllProducts", () => FakeStoreService.getAllProducts(), {
+    onSuccess: (data) => {
+      if (data) {
+        setProducts(data);
+      }
+    },
+  });
 
   return (
     <SafeAreaProvider>
@@ -56,9 +52,7 @@ const ProductList = () => {
                 </Card>
               ))
             ) : (
-              <Text style={styles.noProductsText}>
-                No se encontraron los productos
-              </Text>
+              <Text style={styles.noProductsText}>Products were not found</Text>
             )}
           </View>
         </ScrollView>
