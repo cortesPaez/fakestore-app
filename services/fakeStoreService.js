@@ -10,6 +10,7 @@ const auth = async (body) => {
       console.error("Error service");
       throw new Error("Endpoint unexist");
     }
+
     if (!res.ok && res.status === 401) {
       return res.text();
     }
@@ -25,6 +26,12 @@ const getAllProducts = async () => {
   try {
     const res = await fetch("https://fakestoreapi.com/products");
     const data = await res.json();
+
+    if (res.status === 404) {
+      console.error("Error service");
+      throw new Error("Endpoint unexist");
+    }
+
     return data;
   } catch (error) {
     throw error;
